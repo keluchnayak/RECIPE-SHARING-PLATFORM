@@ -1,0 +1,118 @@
+.manage-recipes-container {
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    margin: 2rem;
+    box-shadow: 0 8px 32px rgba(31, 38, 135, 0.2);
+  }
+  
+  .manage-recipes-container h1 {
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+    color: #333;
+  }
+  
+  .search-bar {
+    display: flex;
+    align-items: center;
+    background: #f0f0f0;
+    padding: 0.5rem 1rem;
+    border-radius: 12px;
+    margin-bottom: 2rem;
+  }
+  
+  .search-bar input {
+    border: none;
+    background: transparent;
+    margin-left: 0.5rem;
+    flex: 1;
+    outline: none;
+    font-size: 1rem;
+  }
+  
+  .recipe-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+  }
+  
+  .recipe-card {
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(15px);
+    border-radius: 15px;
+    padding: 1.5rem;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .recipe-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+  }
+  
+  .recipe-card h3 {
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .recipe-card p {
+    margin: 0.5rem 0;
+  }
+  
+  .status {
+    font-weight: bold;
+    padding: 0.2rem 0.5rem;
+    border-radius: 8px;
+  }
+  
+  .status.approved {
+    background-color: #4caf50;
+    color: white;
+  }
+  
+  .status.rejected {
+    background-color: #f44336;
+    color: white;
+  }
+  
+  .status.pending {
+    background-color: #ff9800;
+    color: white;
+  }
+  
+  .action-buttons {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .action-buttons button {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    border: none;
+    padding: 0.5rem;
+    border-radius: 8px;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .approve-btn {
+    background-color: #4caf50;
+  }
+  
+  .reject-btn {
+    background-color: #f44336;
+  }
+  
+  .delete-btn {
+    background-color: #9c27b0;
+  }
+  
+  .action-buttons button:hover {
+    opacity: 0.8;
+  }
+  

@@ -1,70 +1,77 @@
-# Getting Started with Create React App
+# 🍽️ Recipe Sharing Platform
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A modern, vibrant, and collaborative **Recipe Sharing Platform** built using the **MERN stack** (MongoDB, Express.js, React.js, Node.js). This platform allows users to share, discover, and collaborate on recipes in real-time, featuring a stunning glassmorphism design with playful foodie-style UI elements.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## 🚀 **Project Features**
 
-### `npm start`
+### ✅ **Essential Features**
+- User Authentication (Login/Signup, Google OAuth, Password Reset)
+- User Profile with picture, bio, and favorite recipes
+- Create, Edit, and Delete Recipes
+- Recipe Categories:
+  - Regional
+  - Course-based
+  - Ingredient-based
+  - Festival-based (Indian theme)
+- Search & Filter Recipes (by category, cooking time, ingredients)
+- Like & Comment on Recipes
+- Save Recipes (Favorites List)
+- Share Recipes (Social Media, Copy Link)
+- Responsive UI (Desktop & Mobile Support)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### 🌟 **Intermediate Features** (In Progress)
+- Recipe Ratings & Reviews
+- Trending & Popular Recipes Section
+- Dark Mode Support (Optional) in progress
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### 🔥 **Advanced Features** (Upcoming)
+- Admin Dashboard (Manage Users, Approve Recipes, Handle Reports)
+- Real-Time Recipe Feedback
+- live commenting
 
-### `npm test`
+---
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 🎨 **Design & Aesthetics**
 
-### `npm run build`
+- **UI Style:** Modern Glassmorphism with vibrant, playful food-themed elements.
+- **Animations:** Smooth hover effects, emoji-based reactions, swipeable recipe cards.
+- **Typography:** Clean, modern fonts for readability.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## **Current Progress**
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- ✅ **Navbar** with search, login/signup, and dark mode toggle
+- ✅ **Hero Section** with real image banner
+- ✅ **Categories Section** (Indian theme, interactive grid with hover effects)
+- ✅ **Trending Recipes Section** (Masonry-style layout, emoji-based reactions)
+- ✅ **Create Recipe Page**
+  - Glassmorphism form panel
+  - Image upload feature
+  - Dynamic ingredient fields
+  - Live preview before publishing
+  - Temporary frontend submission (no backend storage yet)
+- ✅ **User Profile Page**
+  - Profile picture, bio, followers/following count
+  - User's recipes in a grid layout
+  - Saved and favorite recipes section
+- ✅ **Footer** redesigned with a modern touch (social icons, address, copyright)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+---
 
-### `npm run eject`
+## ⚙️ **How to Run the Project Locally**
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+1. **Clone the repository:**
+2. **Install dependencies:**
+3. **Run the app:**
+   npm start
+4. **Access the app:**
+   Open your browser and go to `http://localhost:3000`
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## 🔮 **Future Enhancements**
+- Backend integration with MongoDB
+- Real-time collaborative features
+- Admin dashboard for recipe moderation
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- Icons by [React Icons](https://react-icons.github.io/react-icons/)
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)

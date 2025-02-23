@@ -1,0 +1,88 @@
+.edit-delete-container {
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    text-align: center;
+    max-width: 400px;
+    margin: auto;
+  }
+  
+  .recipe-info h3 {
+    font-size: 22px;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .recipe-info p {
+    font-size: 16px;
+    color: #666;
+    margin: 5px 0;
+  }
+  
+  .button-group {
+    margin-top: 15px;
+  }
+  
+  .edit-btn,
+  .delete-btn,
+  .save-btn {
+    border: none;
+    padding: 10px 15px;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 8px;
+    margin: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .edit-btn {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  .delete-btn {
+    background-color: #dc3545;
+    color: white;
+  }
+  
+  .save-btn {
+    background-color: #28a745;
+    color: white;
+  }
+  
+  .edit-btn:hover {
+    background-color: #0056b3;
+  }
+  
+  .delete-btn:hover {
+    background-color: #a71d2a;
+  }
+  
+  .save-btn:hover {
+    background-color: #1c7c2f;
+  }
+  
+  .edit-mode {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .edit-input {
+    padding: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    outline: none;
+    color: #222;
+    font-size: 16px;
+  }
+  
+  .edit-input::placeholder {
+    color: #666;
+  }
+  

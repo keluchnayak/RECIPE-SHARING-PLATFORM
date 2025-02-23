@@ -1,0 +1,62 @@
+.body {
+    font-family: 'Poppins', sans-serif;
+    background: #eebc07;
+}
+
+.navbar {
+    backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    padding: 10px 20px;
+}
+
+.navbar-brand {
+    font-weight: bold;
+    color: #222;
+}
+
+.navbar-toggler {
+    border: none;
+}
+
+.search-bar {
+    width: 300px;
+    border-radius: 20px;
+    border: none;
+    padding: 8px 15px;
+    background: rgba(255, 255, 255, 0.5);
+}
+
+.search-bar::placeholder {
+    color: #666;
+}
+
+.dark-mode-toggle {
+    border: none;
+    background: transparent;
+    color: #222;
+    font-size: 18px;
+    margin-right: 10px;
+}
+
+.auth-buttons .btn {
+    border-radius: 20px;
+    padding: 8px 20px;
+    transition: 0.3s;
+}
+
+.btn-login {
+    background-color: #ff7043;
+    color: white;
+}
+
+.btn-signup {
+    background-color: #ffcc80;
+    color: #222;
+}
+
+.btn-login:hover,
+.btn-signup:hover {
+    opacity: 0.8;
+}
