@@ -1,5 +1,5 @@
 # 🍽️ Recipe Sharing Platform
-
+# SwadShare
 A modern, vibrant, and collaborative **Recipe Sharing Platform** built using the **MERN stack** (MongoDB, Express.js, React.js, Node.js). This platform allows users to share, discover, and collaborate on recipes in real-time, featuring a stunning glassmorphism design with playful foodie-style UI elements.
 
 ---
@@ -42,10 +42,12 @@ A modern, vibrant, and collaborative **Recipe Sharing Platform** built using the
 ## **Current Progress**
 
 - ✅ **Navbar** with search, login/signup, and dark mode toggle
-- ✅ **Hero Section** with real image banner
+- ✅ **Home Page** includes heroSection,trending recipes, categories section
 - ✅ **Categories Section** (Indian theme, interactive grid with hover effects)
 - ✅ **Trending Recipes Section** (Masonry-style layout, emoji-based reactions)
-- ✅ **Create Recipe Page**
+- ✅ **Profile page** where you can see all shared and saved recipes.
+- ✅ **login/signup**  
+  ✅ **Create Recipe Page**
   - Glassmorphism form panel
   - Image upload feature
   - Dynamic ingredient fields
@@ -68,7 +70,9 @@ A modern, vibrant, and collaborative **Recipe Sharing Platform** built using the
 4. **Access the app:**
    Open your browser and go to `http://localhost:3000`
 
+Navigate to home page ,create recipe page (working on realtime adding feature , in backend.) profile page , login/signup , and by clicking trending recipe cards you can go to recipe details page. 
 ## 🔮 **Future Enhancements**
+-create fully developed fronend
 - Backend integration with MongoDB
 - Real-time collaborative features
 - Admin dashboard for recipe moderation
