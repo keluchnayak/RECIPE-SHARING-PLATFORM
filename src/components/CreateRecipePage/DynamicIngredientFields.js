@@ -13,10 +13,12 @@ const DynamicIngredientFields = ({ onIngredientChange }) => {
   };
 
   const addIngredientField = () => {
+    if (ingredients[ingredients.length - 1].trim() === "") return; // Prevent adding empty fields
     setIngredients([...ingredients, ""]);
   };
 
   const removeIngredientField = (index) => {
+    if (ingredients.length === 1) return; // Ensure at least one field remains
     const updatedIngredients = ingredients.filter((_, i) => i !== index);
     setIngredients(updatedIngredients);
     onIngredientChange(updatedIngredients);
@@ -34,12 +36,14 @@ const DynamicIngredientFields = ({ onIngredientChange }) => {
             placeholder="Enter ingredient"
             className="input-field"
           />
-          <button className="remove-btn" onClick={() => removeIngredientField(index)}>
-            <FaTrash />
-          </button>
+          {ingredients.length > 1 && (
+            <button className="remove-btn" onClick={() => removeIngredientField(index)}>
+              <FaTrash />
+            </button>
+          )}
         </div>
       ))}
-      <button className="add-btn" onClick={addIngredientField}>
+      <button className="add-btn" onClick={addIngredientField} disabled={ingredients[ingredients.length - 1].trim() === ""}>
         <FaPlus /> Add Ingredient
       </button>
     </div>

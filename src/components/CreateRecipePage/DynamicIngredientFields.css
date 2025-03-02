@@ -5,6 +5,7 @@
   padding: 20px;
   margin: 20px 0;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  text-align: center;
 }
 
 h3 {
@@ -27,26 +28,49 @@ h3 {
   border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 8px;
   font-size: 1rem;
+  background: rgba(255, 255, 255, 0.3);
+  outline: none;
+}
+
+.input-field::placeholder {
+  color: #666;
 }
 
 .remove-btn, .add-btn {
-  background: #ff5c5c;
-  color: rgb(150, 21, 21);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.9rem;
+  font-weight: bold;
   border: none;
   padding: 8px 12px;
   border-radius: 8px;
   cursor: pointer;
-  transition: 0.3s;
+  transition: all 0.3s ease;
+}
+
+.remove-btn {
+  background: #ff5c5c;
+  color: white;
 }
 
 .add-btn {
   background: #ffdd00;
+  color: #333;
+  margin-top: 10px;
 }
 
 .remove-btn:hover {
   background: #e04848;
+  transform: scale(1.05);
 }
 
 .add-btn:hover {
-  background: #00ff0d;
+  background: #ffc107;
+  transform: scale(1.05);
+}
+
+.add-btn:disabled {
+  background: #ccc;
+  cursor: not-allowed;
 }

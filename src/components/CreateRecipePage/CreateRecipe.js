@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import "./CreateRecipe.css";
-import ImageUpload from "./ImageUpload";
 import IngredientFields from "./DynamicIngredientFields";
-import LivePreview from "./LivePreview";
-import EditDeleteRecipe from "./EditDeleteRecipe";
+import { createRecipe } from "../../utils/apiService";
 
 const CreateRecipe = () => {
   const [recipe, setRecipe] = useState({
@@ -11,40 +9,68 @@ const CreateRecipe = () => {
     author: "",
     timeToCook: "",
     ingredients: [],
-    image: "",
+    imageUrl: "", // Changed from "image" to "imageUrl"
   });
-  
 
+  const [errors, setErrors] = useState({});
+  const [loading, setLoading] = useState(false);
+
+  // Handle Input Change
   const handleInputChange = (e) => {
     setRecipe({ ...recipe, [e.target.name]: e.target.value });
   };
 
+  // Handle Ingredient Change
   const handleIngredientChange = (ingredients) => {
     setRecipe({ ...recipe, ingredients });
   };
 
-  const handleImageUpload = (imageUrl) => {
-    setRecipe({ ...recipe, image: imageUrl });
+  // Form Validation
+  const validateForm = () => {
+    let newErrors = {};
+
+    if (!recipe.name.trim()) newErrors.name = "Recipe name is required";
+    if (!recipe.author.trim()) newErrors.author = "Author name is required";
+    if (!recipe.timeToCook.trim()) {
+      newErrors.timeToCook = "Cooking time is required";
+    } else if (isNaN(recipe.timeToCook) || Number(recipe.timeToCook) <= 0) {
+      newErrors.timeToCook = "Enter a valid cooking time (in minutes)";
+    }
+    if (recipe.ingredients.length === 0 || recipe.ingredients.some(ing => !ing.trim())) {
+      newErrors.ingredients = "At least one valid ingredient is required";
+    }
+    if (!recipe.imageUrl.trim()) newErrors.imageUrl = "Recipe image URL is required";
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
   };
 
-  const handleUpdateRecipe = (updatedRecipe) => {
-    setRecipe(updatedRecipe);
-  };
+  // Handle Form Submission
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-  const handleDeleteRecipe = () => {
-    setRecipe({
-      name: "",
-      author: "",
-      timeToCook: "",
-      ingredients: [],
-      image: "",
-    });
+    if (validateForm()) {
+      setLoading(true);
+      try {
+        const response = await createRecipe(recipe);
+        alert("Recipe Submitted Successfully!");
+        console.log("Recipe Saved:", response);
+
+        setRecipe({ name: "", author: "", timeToCook: "", ingredients: [], imageUrl: "" });
+        setErrors({});
+      } catch (error) {
+        alert("Error submitting recipe. Please try again.");
+        console.error("Submission Error:", error);
+      } finally {
+        setLoading(false);
+      }
+    }
   };
 
   return (
     <div className="create-recipe-container">
       <h2>Create a New Recipe</h2>
-      <div className="recipe-form">
+      <form className="recipe-form" onSubmit={handleSubmit}>
         <input
           type="text"
           name="name"
@@ -53,6 +79,8 @@ const CreateRecipe = () => {
           onChange={handleInputChange}
           className="input-field"
         />
+        {errors.name && <p className="error">{errors.name}</p>}
+
         <input
           type="text"
           name="author"
@@ -61,6 +89,8 @@ const CreateRecipe = () => {
           onChange={handleInputChange}
           className="input-field"
         />
+        {errors.author && <p className="error">{errors.author}</p>}
+
         <input
           type="text"
           name="timeToCook"
@@ -69,17 +99,27 @@ const CreateRecipe = () => {
           onChange={handleInputChange}
           className="input-field"
         />
+        {errors.timeToCook && <p className="error">{errors.timeToCook}</p>}
+
+        {/* Ingredient Fields */}
         <IngredientFields onIngredientChange={handleIngredientChange} />
-        <ImageUpload onUpload={handleImageUpload} />
-      </div>
-      
-      <LivePreview recipe={recipe} />
-      
-      <EditDeleteRecipe
-        recipe={recipe}
-        onUpdate={handleUpdateRecipe}
-        onDelete={handleDeleteRecipe}
-      />
+        {errors.ingredients && <p className="error">{errors.ingredients}</p>}
+
+        {/* Image URL Input Field */}
+        <input
+          type="text"
+          name="imageUrl"
+          placeholder="Paste Recipe Image URL"
+          value={recipe.imageUrl}
+          onChange={handleInputChange}
+          className="input-field"
+        />
+        {errors.imageUrl && <p className="error">{errors.imageUrl}</p>}
+
+        <button type="submit" className="submit-btn" disabled={loading}>
+          {loading ? "Submitting..." : "Submit Recipe"}
+        </button>
+      </form>
     </div>
   );
 };
