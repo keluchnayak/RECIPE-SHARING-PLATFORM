@@ -6,6 +6,7 @@ import TrendingRecipes from "../components/Homepage/TrendingRecipes";
 import Footer from "../components/Footer";
 import { getAllRecipes } from "../utils/apiService";
 import SavedRecipes from "../components/Homepage/SavedRecipes";
+import AllRecipes from "./AllRecipes/AllRecipes";
 
 const HomePage = () => {
   const [recipes, setRecipes] = useState([]);
@@ -39,8 +40,8 @@ const HomePage = () => {
         <p style={{ textAlign: "center", color: "red", fontSize: "18px" }}>{error}</p>
       ) : (
         <div>
-          <TrendingRecipes recipes={recipes} />
-         <SavedRecipes/>
+          <AllRecipes recipes={recipes} />
+          
         </div>
       )}
 

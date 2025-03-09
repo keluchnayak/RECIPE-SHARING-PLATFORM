@@ -3,6 +3,8 @@ import { Navbar, Nav, Container, Form, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { FaMoon, FaSun, FaSearch, FaUser, FaPlus } from "react-icons/fa";
 import "./Navbar.css";
+const token = localStorage.getItem("token");
+const isAuthenticated = !!token;
 
 const GlassmorphicNavbar = () => {
   const [darkMode, setDarkMode] = useState(false);

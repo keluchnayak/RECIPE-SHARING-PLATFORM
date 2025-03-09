@@ -1,46 +1,53 @@
-import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import axios from "axios";
-import RecipeHero from "../components/RecipeDetailPage/RecipeHero";
-import IngredientsSteps from "../components/RecipeDetailPage/IngredientsSteps";
-import RatingsReviews from "../components/RecipeDetailPage/RatingsReviews";
-import RelatedRecipes from "../components/RecipeDetailPage/RelatedRecipes";
+import { useEffect, useState } from "react";
+import { getRecipeById } from "../utils/apiService";
 
-const RecipeDetailPage = () => {
-  const { recipeId } = useParams();
+const RecipeDetail = () => {
+  const { recipeId } = useParams(); // Get ID from URL
   const [recipe, setRecipe] = useState(null);
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    console.log("Fetching Recipe ID:", recipeId); // ✅ Debugging Log
+
     const fetchRecipeDetails = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/api/recipes/${recipeId}`);
-        if (response.data) {
-          setRecipe(response.data);
+        const data = await getRecipeById(recipeId);
+        console.log("Fetched Recipe Data:", data); // ✅ Debugging Log
+
+        if (data && !data.message) {
+          setRecipe(data);
         } else {
-          console.error("Recipe data is missing.");
+          console.error("Recipe Not Found:", data.message);
         }
       } catch (error) {
-        console.error("Error fetching recipe details:", error);
-      } finally {
-        setLoading(false);
+        console.error("Error fetching recipe:", error);
       }
     };
 
-    fetchRecipeDetails();
+    if (recipeId) {
+      fetchRecipeDetails();
+    }
   }, [recipeId]);
 
-  if (loading) return <div>Loading...</div>;
-  if (!recipe) return <div>Recipe not found</div>;
+  if (!recipe) {
+    return <h1>Recipe Not Found</h1>;
+  }
 
   return (
-    <div className="recipe-detail-page">
-      <RecipeHero recipe={recipe} />
-      <IngredientsSteps recipe={recipe} />
-      <RatingsReviews recipeId={recipeId} />
-      <RelatedRecipes related={recipe.relatedRecipes || []} />
+    <div>
+      <h1>{recipe.title}</h1>
+      <img src={recipe.imageUrl} alt={recipe.title} style={{ width: "300px" }} />
+      <p><b>Cooking Time:</b> {recipe.cookingTime} minutes</p>
+      <h3>Ingredients:</h3>
+      <ul>
+        {recipe.ingredients.map((ingredient, index) => (
+          <li key={index}>{ingredient}</li>
+        ))}
+      </ul>
+      <h3>Cooking Steps:</h3>
+      <p>{recipe.cookingSteps}</p>
     </div>
   );
 };
 
-export default RecipeDetailPage;
+export default RecipeDetail;

@@ -1,0 +1,79 @@
+/* 🌟 General Styles */
+.all-recipes-container {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 20px;
+  text-align: center;
+}
+
+.title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #ff6f00;
+  margin-bottom: 20px;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* ⏳ Loading & No Recipes */
+.loader, .no-recipes {
+  font-size: 1.5rem;
+  color: #555;
+  margin-top: 20px;
+}
+
+/* 🎨 Recipe Grid Layout */
+.recipes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  justify-content: center;
+  padding: 20px;
+}
+
+/* 🍽️ Recipe Cards */
+.recipe-card {
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.recipe-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* 🖼️ Recipe Image */
+.recipe-img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+/* 📄 Recipe Info */
+.recipe-info {
+  padding: 15px;
+  text-align: left;
+}
+
+.recipe-info h2 {
+  font-size: 1.4rem;
+  margin-bottom: 8px;
+  color: #333;
+}
+
+.recipe-info p {
+  font-size: 1rem;
+  color: #666;
+}
+
+/* 🎭 Responsive Design */
+@media (max-width: 768px) {
+  .recipes-grid {
+    grid-template-columns: 1fr;
+  }
+}

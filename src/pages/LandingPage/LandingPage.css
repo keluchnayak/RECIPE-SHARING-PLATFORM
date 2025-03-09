@@ -1,0 +1,47 @@
+.landing-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    background: url('https://i.pinimg.com/474x/0f/64/8a/0f648a264b8179e13a7c6ff540da4e4f.jpg') no-repeat center center/cover;
+  }
+  
+  .app-title {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: #fff;
+    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+  }
+  
+  .auth-container {
+    display: flex;
+    gap: 20px;
+  }
+  
+  .auth-box {
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.2);
+    color: #fff;
+  }
+  
+  input, select, button {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 5px;
+    border: none;
+  }
+  
+  button {
+    background: #ff7f50;
+    color: white;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background: #ff6347;
+  }
+  

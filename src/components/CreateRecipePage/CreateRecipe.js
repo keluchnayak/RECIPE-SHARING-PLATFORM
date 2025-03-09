@@ -1,124 +1,103 @@
 import React, { useState } from "react";
-import "./CreateRecipe.css";
-import IngredientFields from "./DynamicIngredientFields";
-import { createRecipe } from "../../utils/apiService";
+import axios from "axios";
+import "./CreateRecipe.css"; // Glassmorphism Styles
 
 const CreateRecipe = () => {
-  const [recipe, setRecipe] = useState({
-    name: "",
-    author: "",
-    timeToCook: "",
-    ingredients: [],
-    imageUrl: "", // Changed from "image" to "imageUrl"
-  });
+  const [title, setTitle] = useState("");
+  const [imageUrl, setImageUrl] = useState("");
+  const [ingredients, setIngredients] = useState([""]);
+  const [cookingTime, setCookingTime] = useState("");
+  const [cookingSteps, setCookingSteps] = useState(""); // New field
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
 
-  const [errors, setErrors] = useState({});
-  const [loading, setLoading] = useState(false);
-
-  // Handle Input Change
-  const handleInputChange = (e) => {
-    setRecipe({ ...recipe, [e.target.name]: e.target.value });
+  // ✅ Add or Remove Ingredient Fields
+  const handleIngredientChange = (index, value) => {
+    const updatedIngredients = [...ingredients];
+    updatedIngredients[index] = value;
+    setIngredients(updatedIngredients);
   };
 
-  // Handle Ingredient Change
-  const handleIngredientChange = (ingredients) => {
-    setRecipe({ ...recipe, ingredients });
+  const addIngredientField = () => {
+    setIngredients([...ingredients, ""]);
   };
 
-  // Form Validation
-  const validateForm = () => {
-    let newErrors = {};
-
-    if (!recipe.name.trim()) newErrors.name = "Recipe name is required";
-    if (!recipe.author.trim()) newErrors.author = "Author name is required";
-    if (!recipe.timeToCook.trim()) {
-      newErrors.timeToCook = "Cooking time is required";
-    } else if (isNaN(recipe.timeToCook) || Number(recipe.timeToCook) <= 0) {
-      newErrors.timeToCook = "Enter a valid cooking time (in minutes)";
+  const removeIngredientField = (index) => {
+    if (ingredients.length > 1) {
+      const updatedIngredients = ingredients.filter((_, i) => i !== index);
+      setIngredients(updatedIngredients);
     }
-    if (recipe.ingredients.length === 0 || recipe.ingredients.some(ing => !ing.trim())) {
-      newErrors.ingredients = "At least one valid ingredient is required";
-    }
-    if (!recipe.imageUrl.trim()) newErrors.imageUrl = "Recipe image URL is required";
-
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
   };
 
-  // Handle Form Submission
+  // ✅ Submit Recipe
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!title || !imageUrl || !cookingTime || !cookingSteps || ingredients.some((i) => i.trim() === "")) {
+      setError("All fields are required.");
+      return;
+    }
+    setError("");
 
-    if (validateForm()) {
-      setLoading(true);
-      try {
-        const response = await createRecipe(recipe);
-        alert("Recipe Submitted Successfully!");
-        console.log("Recipe Saved:", response);
+    try {
+      const response = await axios.post("http://localhost:5000/api/recipes", {
+        title,
+        imageUrl,
+        ingredients,
+        cookingTime,
+        cookingSteps,
+      });
 
-        setRecipe({ name: "", author: "", timeToCook: "", ingredients: [], imageUrl: "" });
-        setErrors({});
-      } catch (error) {
-        alert("Error submitting recipe. Please try again.");
-        console.error("Submission Error:", error);
-      } finally {
-        setLoading(false);
+      if (response.status === 201) {
+        setSuccess("Recipe added successfully!");
+        setTitle("");
+        setImageUrl("");
+        setIngredients([""]);
+        setCookingTime("");
+        setCookingSteps("");
       }
+    } catch (err) {
+      setError("Failed to add recipe.");
     }
   };
 
   return (
     <div className="create-recipe-container">
-      <h2>Create a New Recipe</h2>
-      <form className="recipe-form" onSubmit={handleSubmit}>
-        <input
-          type="text"
-          name="name"
-          placeholder="Recipe Name"
-          value={recipe.name}
-          onChange={handleInputChange}
-          className="input-field"
+      <h1>Create a New Recipe</h1>
+      {error && <p className="error-msg">{error}</p>}
+      {success && <p className="success-msg">{success}</p>}
+      <form onSubmit={handleSubmit} className="recipe-form">
+        <label>Recipe Title:</label>
+        <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Enter recipe title" />
+
+        <label>Image URL:</label>
+        <input type="text" value={imageUrl} onChange={(e) => setImageUrl(e.target.value)} placeholder="Paste image URL" />
+
+        <label>Ingredients:</label>
+        {ingredients.map((ingredient, index) => (
+          <div key={index} className="ingredient-field">
+            <input
+              type="text"
+              value={ingredient}
+              onChange={(e) => handleIngredientChange(index, e.target.value)}
+              placeholder={`Ingredient ${index + 1}`}
+            />
+            <button type="button" onClick={() => removeIngredientField(index)} className="remove-btn">✖</button>
+          </div>
+        ))}
+        <button type="button" onClick={addIngredientField} className="add-btn">+ Add Ingredient</button>
+
+        <label>Cooking Time (minutes):</label>
+        <input type="number" value={cookingTime} onChange={(e) => setCookingTime(e.target.value)} placeholder="Enter time" />
+
+        <label>Cooking Steps:</label>
+        <textarea
+          value={cookingSteps}
+          onChange={(e) => setCookingSteps(e.target.value)}
+          placeholder="Write step-by-step instructions..."
+          rows="5"
         />
-        {errors.name && <p className="error">{errors.name}</p>}
 
-        <input
-          type="text"
-          name="author"
-          placeholder="Author Name"
-          value={recipe.author}
-          onChange={handleInputChange}
-          className="input-field"
-        />
-        {errors.author && <p className="error">{errors.author}</p>}
-
-        <input
-          type="text"
-          name="timeToCook"
-          placeholder="Cooking Time (mins)"
-          value={recipe.timeToCook}
-          onChange={handleInputChange}
-          className="input-field"
-        />
-        {errors.timeToCook && <p className="error">{errors.timeToCook}</p>}
-
-        {/* Ingredient Fields */}
-        <IngredientFields onIngredientChange={handleIngredientChange} />
-        {errors.ingredients && <p className="error">{errors.ingredients}</p>}
-
-        {/* Image URL Input Field */}
-        <input
-          type="text"
-          name="imageUrl"
-          placeholder="Paste Recipe Image URL"
-          value={recipe.imageUrl}
-          onChange={handleInputChange}
-          className="input-field"
-        />
-        {errors.imageUrl && <p className="error">{errors.imageUrl}</p>}
-
-        <button type="submit" className="submit-btn" disabled={loading}>
-          {loading ? "Submitting..." : "Submit Recipe"}
-        </button>
+        <button type="submit" className="submit-btn">Submit Recipe</button>
       </form>
     </div>
   );
